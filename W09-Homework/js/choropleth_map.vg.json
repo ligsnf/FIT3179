@@ -3,9 +3,15 @@
   "title": "Malaysia",
   "width": 800,
   "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/ligsnf/FIT3179/main/W09-Homework/js/ne_10m_malaysia_states.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "ne_10m_admin_1_states_provinces"
+    }
+  },
   "projection": {
-    "type": "identity",
-    "reflectY": true
+    "type": "equalEarth"
   },
   "layer": [
     {
@@ -15,8 +21,11 @@
           "as": "note"
         }
       ],
-      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
-      "encoding": {"tooltip": {"field": "note"}}
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white"
+      }
     },
     {
       "data": {
@@ -32,13 +41,6 @@
       }
     },
     {
-      "data": {
-        "url": "https://raw.githubusercontent.com/ligsnf/FIT3179/main/W09-Homework/js/ne_10m_malaysia_states.topojson",
-        "format": {
-          "type": "topojson",
-          "feature": "ne_10m_admin_1_states_provinces"
-        }
-      },
       "transform": [
         {
           "lookup": "properties.name",
@@ -54,7 +56,8 @@
         }
       ],
       "mark": {
-        "type": "geoshape"
+        "type": "geoshape", 
+        "stroke": "white"
       },
       "encoding": {
         "color": {
