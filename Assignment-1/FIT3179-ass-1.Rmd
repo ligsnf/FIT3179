@@ -1,0 +1,441 @@
+---
+title: "FIT3179: Data Visualisation 1"
+author: "Liangdi Wang"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    highlight: haddock
+---
+
+### Load Required Libraries
+
+```{r message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(knitr)
+```
+
+### Load Data
+
+Download the data from [WCA Results Export](https://www.worldcubeassociation.org/export/results).
+
+```{r}
+# Read tsv files from working directory and store in objects
+competitions  <- read_tsv("./data/WCA_export_Competitions.tsv", show_col_types = FALSE)
+persons <- read_tsv("./data/WCA_export_Persons.tsv", show_col_types = FALSE)
+events <- read_tsv("./data/WCA_export_Events.tsv", show_col_types = FALSE)
+countries <- read_tsv("./data/WCA_export_Countries.tsv", show_col_types = FALSE)
+continents <- read_tsv("./data/WCA_export_Continents.tsv", show_col_types = FALSE)
+ranks_average <- read_tsv("./data/WCA_export_RanksAverage.tsv", show_col_types = FALSE)
+ranks_single <- read_tsv("./data/WCA_export_RanksSingle.tsv", show_col_types = FALSE)
+results <- read_tsv("./data/WCA_export_Results.tsv", show_col_types = FALSE)
+```
+
+```{r}
+# Join datasets
+events_to_exclude <- c("333mbf", "333mbo")
+results <- results %>%
+  filter(!eventId %in% events_to_exclude) %>%
+  inner_join(events, by = c("eventId" = "id")) %>%
+  inner_join(competitions, by = c("competitionId" = "id")) %>%
+  inner_join(countries, by = c("personCountryId" = "id")) %>%
+  inner_join(continents, by = c("continentId" = "id")) %>%
+  rename(eventName = name.x, personCountry = name.x.x, personContinent = name.y.y) %>%
+  select(competitionId, eventId, eventName, personId, personName, best, average, year, month, day, personCountry, personContinent)
+```
+
+```{r}
+# Filter out invalid times and convert to seconds (except for Fewest Moves)
+results_filtered <- results %>%
+  mutate(
+    best = ifelse(eventId != "333fm" & best > 0, best / 100, best),
+    average = ifelse(average > 0, average / 100, average)
+  )
+```
+
+### Calculate Records
+
+```{r}
+# Function to calculate both single and average records by year
+get_best_records_by_year <- function(results_data) {
+
+  # National Records (NR) for Single
+  nr_best_records <- results_data %>%
+    filter(best > 0) %>%
+    group_by(eventId, eventName, year, personCountry) %>%
+    slice_min(order_by = best, with_ties = FALSE) %>%
+    mutate(
+      recordValue = best,
+      recordType = "NR Single",
+      recordDescription = paste(personCountry, "Record")
+    )
+  
+  # National Records (NR) for Average
+  nr_average_records <- results_data %>%
+    filter(average > 0) %>%
+    group_by(eventId, eventName, year, personCountry) %>%
+    slice_min(order_by = average, with_ties = FALSE) %>%
+    mutate(
+      recordValue = average,
+      recordType = "NR Average",
+      recordDescription = paste(personCountry, "Record")
+    )
+
+  nr_records <- bind_rows(nr_best_records, nr_average_records) %>%
+    select(eventId, eventName, year, month, day, personId, personName, personCountry, personContinent, competitionId, best, average, recordValue, recordType, recordDescription)
+
+  # Continental Records (CR) for Single
+  cr_best_records <- results_data %>%
+    filter(best > 0) %>%
+    group_by(eventId, eventName, year, personContinent) %>%
+    slice_min(order_by = best, with_ties = FALSE) %>%
+    mutate(
+      recordValue = best,
+      recordType = "CR Single",
+      recordDescription = paste(personContinent, "Record")
+    )
+  
+  # Continental Records (CR) for Average
+  cr_average_records <- results_data %>%
+    filter(average > 0) %>%
+    group_by(eventId, eventName, year, personContinent) %>%
+    slice_min(order_by = average, with_ties = FALSE) %>%
+    mutate(
+      recordValue = average,
+      recordType = "CR Average",
+      recordDescription = paste(personContinent, "Record")
+    )
+
+  cr_records <- bind_rows(cr_best_records, cr_average_records) %>%
+    select(eventId, eventName, year, month, day, personId, personName, personCountry, personContinent, competitionId, best, average, recordValue, recordType, recordDescription)
+
+  # World Records (WR) for Single
+  wr_best_records <- results_data %>%
+    filter(best > 0) %>%
+    group_by(eventId, eventName, year) %>%
+    slice_min(order_by = best, with_ties = FALSE) %>%
+    mutate(
+      recordValue = best,
+      recordType = "WR Single",
+      recordDescription = "World Record"
+    )
+  
+  # World Records (WR) for Average
+  wr_average_records <- results_data %>%
+    filter(average > 0) %>%
+    group_by(eventId, eventName, year) %>%
+    slice_min(order_by = average, with_ties = FALSE) %>%
+    mutate(
+      recordValue = average,
+      recordType = "WR Average",
+      recordDescription = "World Record"
+    )
+
+  wr_records <- bind_rows(wr_best_records, wr_average_records) %>%
+    select(eventId, eventName, year, month, day, personId, personName, personCountry, personContinent, competitionId, best, average, recordValue, recordType, recordDescription)
+
+  # Combine NR, CR, and WR records
+  combined_records <- bind_rows(nr_records, cr_records, wr_records)
+
+  return(combined_records)
+}
+
+# Calculate the best records for all countries, continents, and globally
+records <- get_best_records_by_year(results_filtered)
+```
+
+```{r}
+# Function to propagate specific records from 2008 onwards
+propagate_specific_records <- function(records, target_country = NULL, target_record_type = NULL) {
+  
+  # Filter for the specific records from 2008 onwards
+  filtered_records <- records %>%
+    filter(year >= 2008) %>%
+    filter(
+      (recordType == target_record_type) &
+      (
+        (target_country == "World") |
+        (target_country != "World" & personCountry == target_country)
+      )
+    ) %>%
+    arrange(eventId, recordType, year, month, day)
+
+  # Add column to hold the year a record applies to
+  filtered_records <- filtered_records %>%
+    mutate(recordYear = year)
+
+  # Propagate records year by year
+  for (i in 2:nrow(filtered_records)) {
+    if (filtered_records$eventId[i] == filtered_records$eventId[i-1] &&
+        filtered_records$recordType[i] == filtered_records$recordType[i-1]) {
+      
+      # If the recordYear doesn't progress sequentially, add missing years
+      if (filtered_records$recordYear[i] > filtered_records$recordYear[i-1] + 1) {
+        missing_years <- (filtered_records$recordYear[i-1] + 1):(filtered_records$recordYear[i] - 1)
+        for (missing_year in missing_years) {
+          new_record <- filtered_records[i-1, ]
+          new_record$recordYear <- missing_year
+          filtered_records <- bind_rows(filtered_records, new_record)
+        }
+      }
+      
+      # Check if the current record is slower and needs to be replaced
+      if (filtered_records$recordValue[i] > filtered_records$recordValue[i-1]) {
+        filtered_records[i, ] <- filtered_records[i-1, ]
+        filtered_records$recordYear[i] <- filtered_records$recordYear[i-1] + 1
+      }
+    }
+  }
+
+  # Re-arrange and return the final records
+  filtered_records <- filtered_records %>%
+    arrange(eventId, recordType, recordYear)
+
+  return(filtered_records)
+}
+
+# Apply the function for Malaysia NR (Single and Average)
+malaysia_nr_single <- propagate_specific_records(records, "Malaysia", "NR Single")
+malaysia_nr_average <- propagate_specific_records(records, "Malaysia", "NR Average")
+
+# Apply the function for China NR (Single and Average)
+china_nr_single <- propagate_specific_records(records, "China", "NR Single")
+china_nr_average <- propagate_specific_records(records, "China", "NR Average")
+
+# Apply the function for France NR (Single and Average)
+france_nr_single <- propagate_specific_records(records, "France", "NR Single")
+france_nr_average <- propagate_specific_records(records, "France", "NR Average")
+
+# Apply the function for World Records (Single and Average)
+world_wr_single <- propagate_specific_records(records, "World", "WR Single")
+world_wr_average <- propagate_specific_records(records, "World", "WR Average")
+
+# Combine all records
+final_records <- bind_rows(
+  malaysia_nr_single, 
+  malaysia_nr_average, 
+  china_nr_single, 
+  china_nr_average, 
+  france_nr_single, 
+  france_nr_average, 
+  world_wr_single, 
+  world_wr_average
+)
+
+# Arrange final records by eventId, recordType, and recordYear
+final_records <- final_records %>%
+  arrange(eventId, recordType, recordYear)
+
+# Display the final records
+final_records
+```
+
+```{r}
+# Export the dataset
+write_csv(final_records, "records_filtered.csv")
+```
+
+### Calculate Number of Competitors
+
+```{r}
+# Calculate distinct competitors globally and for Malaysia by year and event
+competitors_by_year <- results_filtered %>%
+  group_by(year, eventName) %>%
+  summarize(
+    total_global = n_distinct(personId),
+    .groups = 'drop'
+  )
+
+competitors_by_year_malaysia <- results_filtered %>%
+  filter(personCountry == "Malaysia") %>%
+  group_by(year, eventName) %>%
+  summarize(
+    total_malaysia = n_distinct(personId),
+    .groups = 'drop'
+  )
+
+# Calculate total distinct competitors globally and for Malaysia by year
+total_competitors_global <- results_filtered %>%
+  group_by(year) %>%
+  summarize(
+    total_global = n_distinct(personId),
+    .groups = 'drop'
+  )
+
+total_competitors_malaysia <- results_filtered %>%
+  filter(personCountry == "Malaysia") %>%
+  group_by(year) %>%
+  summarize(
+    total_malaysia = n_distinct(personId),
+    .groups = 'drop'
+  )
+
+# Combine global and Malaysia results
+competitors_combined <- full_join(competitors_by_year, competitors_by_year_malaysia, 
+                                  by = c("year", "eventName")) %>%
+  replace_na(list(total_global = 0, total_malaysia = 0))
+
+# Pivot wider to create columns for each event, making sure to summarize properly
+competitors_wide <- competitors_combined %>%
+  pivot_wider(
+    names_from = eventName, 
+    values_from = c(total_global, total_malaysia), 
+    values_fn = sum,  # Summarize duplicates to avoid list-cols
+    values_fill = 0
+  ) %>%
+  arrange(year)
+
+# Add the total column for distinct competitors regardless of the event
+competitors_wide <- competitors_wide %>%
+  left_join(total_competitors_global, by = "year") %>%
+  left_join(total_competitors_malaysia, by = "year")
+
+# Summarize the data to include a total for each region and year
+competitors_summary <- competitors_wide %>%
+  mutate(
+    total_global_all = total_global,
+    total_malaysia_all = total_malaysia
+  ) %>%
+  select(-total_global, -total_malaysia)
+
+# Combine Global and Malaysia data into a final table
+competitors_summary <- competitors_summary %>%
+  select(year, total_global_all, total_malaysia_all, everything()) %>%
+  pivot_longer(cols = starts_with("total_"), 
+               names_to = c("region", "event"),
+               names_pattern = "total_(global_all|malaysia_all|global|malaysia)_(.*)", 
+               values_to = "count") %>%
+  filter(!is.na(region)) %>%  # Filter out the "NA" region
+  pivot_wider(names_from = event, values_from = count) %>%
+  arrange(year, region)
+```
+
+```{r}
+# Reshape data to long format
+competitors_final <- competitors_summary %>%
+  mutate(all = replace_na(all, 0)) %>%  # Replace NAs in 'all' with 0
+  pivot_longer(cols = starts_with("3x3x3 Cube"):last_col(),  # Adjust the range of columns as needed
+               names_to = "event",
+               values_to = "count") %>%
+  mutate(count = replace_na(count, 0)) %>%  # Replace NAs in 'count' with 0
+  group_by(year, region) %>%
+  mutate(
+    percentage = if_else(all == 0, 0, (count / all) * 100)  # Calculate percentage based on 'all' column
+  ) %>%
+  ungroup()
+```
+
+```{r}
+# Export the dataset
+write_csv(competitors_final, "competitors.csv")
+```
+
+### Top 100
+
+```{r}
+# Filter top 100 for each event
+top100_average <- ranks_average %>%
+  filter(worldRank <= 100) %>%
+  mutate(rankType = "Average")
+
+top100_single <- ranks_single %>%
+  filter(worldRank <= 100) %>%
+  mutate(rankType = "Single")
+
+# Combine the two datasets
+top100_combined <- bind_rows(top100_average, top100_single)
+
+# Join with Persons, Countries, and Events to get the full details
+top100_combined <- top100_combined %>%
+  left_join(persons, by = c("personId" = "id")) %>%
+  left_join(countries, by = c("countryId" = "id")) %>%
+  left_join(events, by = c("eventId" = "id")) %>%
+  rename(eventName = name, countryName = name.y)
+
+# Group and summarize to get counts per country per event and ranking type
+top100 <- top100_combined %>%
+  group_by(eventId, eventName, countryName, rankType) %>%
+  summarize(count = n(), .groups = 'drop')
+
+# Rearrange columns for better readability
+top100 <- top100 %>%
+  select(eventId, eventName, countryName, count, rankType)
+```
+
+```{r}
+# Export the dataset
+write_csv(top100, "top_100.csv")
+```
+
+### Rankings for bump chart
+
+```{r}
+# Function to calculate top 10 unique-country results for a specific event and type
+get_top_unique_results <- function(results_data, event_id, start_year = 2024, years_back = 8) {
+  # Initialize an empty data frame to store results
+  final_results <- data.frame()
+
+  # Loop over each year, starting from the start_year and going backwards
+  for (current_year in seq(start_year, start_year - years_back + 1, by = -1)) {
+    # Filter results for the specific event and only for years up to the current loop year
+    yearly_results <- results_data %>%
+      filter(eventId == event_id & year <= current_year & best > 0) %>%
+      arrange(best) %>%  # Arrange by best time (since we're focusing on single)
+      distinct(personCountry, .keep_all = TRUE) %>%  # Ensure unique countries
+      slice_min(best, n = 10) %>%  # Select top 10 results
+      mutate(rank = row_number(), year = current_year)  # Add rank and assign the year
+
+    # Combine with the final results
+    final_results <- bind_rows(final_results, yearly_results)
+  }
+
+  # Select only the required columns for the bump chart
+  final_results <- final_results %>%
+    select(eventId, eventName, personId, personName, best, personCountry, competitionId, year, rank) %>%
+    arrange(year, rank)
+
+  return(final_results)
+}
+
+# Apply the function for 5x5x5 Blindfolded - Single from 2024 backwards 8 years
+bump_chart_data <- get_top_unique_results(results_filtered, "555bf", start_year = 2024, years_back = 8)
+```
+
+```{r}
+# Export the dataset
+write_csv(bump_chart_data, "rankings.csv")
+```
+
+### Notable events for timeline
+
+```{r}
+# Filter for Malaysians, arrange by earliest year, and select the first 20
+malaysian_competitors <- persons %>%
+  filter(countryId == "Malaysia") %>%                # Filter for Malaysia
+  arrange(as.numeric(substr(id, 1, 4))) %>%          # Arrange by earliest year
+  slice_head(n = 20)                                 # Select the first 20
+
+# Display the result
+print(malaysian_competitors)
+```
+
+```{r}
+# Step 1: Extract the year from the ID
+persons <- persons %>%
+  mutate(year = as.numeric(substr(id, 1, 4))) %>%
+  filter(countryId == "Malaysia")
+
+# Step 2: Group by year and count the number of competitors
+yearly_count <- persons %>%
+  group_by(year) %>%
+  summarise(num = n()) %>%
+  arrange(year)
+
+# Step 3: Calculate the cumulative number of competitors
+yearly_count <- yearly_count %>%
+  mutate(cumulative_num = cumsum(num))
+
+# Display the result
+print(yearly_count)
+```
