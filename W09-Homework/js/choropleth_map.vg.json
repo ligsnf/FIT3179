@@ -61,20 +61,28 @@
       },
       "encoding": {
         "color": {
+          "title": "Median Income (MYR, monthly)",
           "field": "income_median",
-          "type": "quantitative",
-          "title": "Median Income"
+          "type": "quantitative", 
+          "scale": {
+            "scheme": "greens",
+            "domain": [3000, 11000]
+          },
+          "legend": {
+            "format": "$d"
+          }
         },
         "tooltip": [
           {
+            "title": "State",
             "field": "properties.name",
-            "type": "nominal",
-            "title": "State"
+            "type": "nominal"
           },
           {
+            "title": "Median Income",
             "field": "income_median",
             "type": "quantitative",
-            "title": "Median Income"
+            "format": "$d"
           }
         ]
       }
