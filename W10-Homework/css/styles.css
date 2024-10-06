@@ -1,0 +1,29 @@
+html, body {
+	font-family: sans-serif;
+}
+
+main {
+	display: flex;
+  flex-direction: column;
+  justify-content: space-between;  /* Push content to top and bottom */
+  align-items: center;  /* Center content horizontally */
+}
+
+#choropleth_map, #line_chart {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;  /* Center map vertically */
+  justify-content: center;  /* Center map horizontally */
+}
+
+footer {
+  display: flex;
+  align-items: center;  /* Vertically center image and text */
+  justify-content: center;  /* Center horizontally */
+	font-size: small;
+  padding: 20px 0;  /* Add padding to create space */
+}
+
+footer img {
+  margin-right: 8px;  /* Add space between the image and the text */
+}
