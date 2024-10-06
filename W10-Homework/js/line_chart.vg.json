@@ -64,36 +64,11 @@
       "type": "quantitative",
       "title": "CPI (Consumer Price Index)",
       "scale": {"zero": false}
-    },
-    "color": {
-      "condition": {
-        "param": "hover",
-        "field": "state",
-        "type": "nominal",
-        "legend": null
-      },
-      "value": "grey"
-    },
-    "opacity": {
-      "condition": {
-        "param": "hover",
-        "value": 1
-      },
-      "value": 0.2
     }
   },
   "layer": [
     {
       "mark": "line",
-      "params": [{
-        "name": "hover",
-        "value": [{"state": "W.P. Kuala Lumpur"}],
-        "select": {
-          "type": "point",
-          "fields": ["state"],
-          "on": "pointerover"
-        }
-      }],
       "encoding": {
         "color": {
           "field": "state",
@@ -117,6 +92,37 @@
             "type": "nominal"
           }
         ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [8, 8], 
+        "size": 1
+      },
+      "encoding": {
+        "x": {
+          "datum": {"year": 2020, "month": 4, "date": 1}, 
+          "type": "temporal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 16,
+        "dx": 10,
+        "align": "left"
+      },
+      "encoding": {
+        "text": {"value": "COVID-19 Pandemic Begins"},
+        "x": {
+          "datum": {"year": 2020, "month": 3, "date": 1}, 
+          "type": "temporal"
+        },
+        "y": {
+          "datum": 100
+        }
       }
     }
   ]
