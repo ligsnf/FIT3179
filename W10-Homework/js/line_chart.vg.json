@@ -4,7 +4,7 @@
   "height": 600,
   "title": "Consumer Price Index of Malaysian States (2010-2024)",
   "data": {
-    "url": "https://raw.githubusercontent.com/ligsnf/FIT3179/main/W10-Homework/data/cpi_2d_state.csv"
+    "url": "data/cpi_2d_state.csv"
   },
   "params": [
     {
@@ -43,7 +43,7 @@
           "Insurance & Financial Services",
           "Personal Care, Social Protection & Miscellaneous Goods and Services"
         ],
-        "name": "Division Selection: "
+        "name": "Category: "
       },
       "value": "overall"
     }
