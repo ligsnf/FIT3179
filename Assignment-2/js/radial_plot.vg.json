@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A radial chart showing various cost of living indices for Malaysia in 2024.",
+  "width": 400,
+  "height": 300,
+  "data": {
+    "url": "data/cost_of_living_index.csv"
+  },
+  "transform": [
+    {"filter": "datum.year == 2024"},
+    {
+      "fold": [
+        "cost of living index",
+        "rent index",
+        "cost of living plus rent index",
+        "groceries index",
+        "restaurant price index",
+        "local purchasing power index"
+      ],
+      "as": ["IndexType", "Value"]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "arc", "innerRadius": 20, "stroke": "#fff"},
+      "encoding": {
+        "tooltip": [
+          {
+            "title": "Year",
+            "field": "year",
+            "type": "ordinal"
+          },
+          {
+            "title": "Index Type",
+            "field": "IndexType",
+            "type": "nominal"
+          },
+          {
+            "title": "Value",
+            "field": "Value",
+            "type": "quantitative"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "radiusOffset": 15},
+      "encoding": {
+        "text": {"field": "Value", "type": "quantitative"}
+      }
+    }
+  ],
+  "encoding": {
+    "theta": {"field": "Value", "type": "quantitative", "stack": true},
+    "radius": {"field": "Value", "scale": {"type": "sqrt", "zero": true, "rangeMin": 20}},
+    "color": {"field": "IndexType", "title": "Index Type", "type": "nominal"}
+  }
+}
