@@ -3,7 +3,7 @@
   "width": "container",
   "height": 400,
   "data": {
-    "url": "data/cpi_2d_state.csv"
+    "url": "data/cpi_2d_state_filtered.csv"
   },
   "params": [
     {
@@ -56,7 +56,8 @@
     "x": {
       "field": "date",
       "type": "temporal",
-      "title": "Date"
+      "title": "Date",
+      "axis": {"format": "%Y"}
     },
     "y": {
       "field": "index",
@@ -120,7 +121,7 @@
           "type": "temporal"
         },
         "y": {
-          "datum": 100
+          "datum": 103
         }
       }
     }

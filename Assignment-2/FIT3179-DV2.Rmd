@@ -1,0 +1,33 @@
+---
+title: "FIT3179: Data Visualisation 2"
+author: "Liangdi Wang"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    highlight: haddock
+---
+
+### Load necessary libraries
+
+```{r, message=FALSE}
+library(knitr)
+library(tidyverse)
+library(lubridate)
+```
+
+### Filter Data to reduce size
+
+Download the data from [data.gov.my](https://data.gov.my/data-catalogue/cpi_state).
+
+```{r}
+# Read in the data
+cpi_2d_state <- read_csv("./data/cpi_2d_state.csv")
+
+# Filter the data to include dates after 2016-08-01
+cpi_2d_state_filtered <- cpi_2d_state %>%
+    filter(ymd(date) >= ymd("2016-08-01"))
+
+# Write the filtered data to a new CSV file
+write_csv(cpi_2d_state_filtered, "./data/cpi_2d_state_filtered.csv")
+```
