@@ -1,0 +1,129 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 400,
+  "title": "Consumer Price Index of Malaysian States (2010-2024)",
+  "data": {
+    "url": "data/cpi_2d_state.csv"
+  },
+  "params": [
+    {
+      "name": "Division_Selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          "overall",
+          "01",
+          "02",
+          "03",
+          "04",
+          "05",
+          "06",
+          "07",
+          "08",
+          "09",
+          "10",
+          "11",
+          "12",
+          "13"
+        ],
+        "labels": [
+          "Overall",
+          "Food & Beverages",
+          "Alcoholic Beverages & Tobacco",
+          "Clothing & Footwear",
+          "Housing, Utilities, Gas & Other Fuels",
+          "Household Furnishings, Equipment & Maintenance",
+          "Health",
+          "Transport",
+          "Information & Communication",
+          "Recreation, Sport & Culture",
+          "Education",
+          "Restaurant & Accommodation Services",
+          "Insurance & Financial Services",
+          "Personal Care, Social Protection & Miscellaneous Goods and Services"
+        ],
+        "name": "Category: "
+      },
+      "value": "overall"
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.division == Division_Selection"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "Date"
+    },
+    "y": {
+      "field": "index",
+      "type": "quantitative",
+      "title": "CPI (Consumer Price Index)",
+      "scale": {"zero": false}
+    }
+  },
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "color": {
+          "field": "state",
+          "title": "State",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "title": "State",
+            "field": "state",
+            "type": "nominal"
+          },
+          {
+            "title": "CPI",
+            "field": "index",
+            "type": "quantitative"
+          },
+          {
+            "title": "Category",
+            "field": "division",
+            "type": "nominal"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [8, 8], 
+        "size": 1
+      },
+      "encoding": {
+        "x": {
+          "datum": {"year": 2020, "month": 4, "date": 1}, 
+          "type": "temporal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 16,
+        "dx": 10,
+        "align": "left"
+      },
+      "encoding": {
+        "text": {"value": "COVID-19 Pandemic Begins"},
+        "x": {
+          "datum": {"year": 2020, "month": 3, "date": 1}, 
+          "type": "temporal"
+        },
+        "y": {
+          "datum": 100
+        }
+      }
+    }
+  ]
+}
