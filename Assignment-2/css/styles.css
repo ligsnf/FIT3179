@@ -26,6 +26,11 @@ body {
   padding-top: 35px;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .vis-container {
   flex-grow: 1;
   display: flex;

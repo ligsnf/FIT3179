@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 700,
+  "width": "container",
   "height": 400,
   "data": {
     "url": "data/cpi_2d_state.csv"
@@ -109,7 +109,7 @@
     {
       "mark": {
         "type": "text",
-        "fontSize": 16,
+        "fontSize": 14,
         "dx": 5,
         "align": "left"
       },
