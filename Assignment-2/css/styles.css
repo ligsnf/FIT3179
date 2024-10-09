@@ -2,9 +2,9 @@ body *{
   font-family: 'Open Sans', sans-serif;
 }
 
-h1 {
+h1, h1 span {
   font-weight: 700;
-  font-size: 3em;
+  font-size: 48px;
   font-family: 'Roboto Serif', serif;
 }
 
@@ -24,11 +24,37 @@ body {
   margin: auto;
   padding: 50px;
   padding-top: 35px;
+  padding-bottom: 35px;
 }
 
 .flex {
   display: flex;
   justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blue {
+  color: #010066;
+}
+
+.yellow {
+  color: #ffcc00;
+}
+
+.red {
+  color: #cc0001;
 }
 
 .vis-container {
@@ -52,7 +78,7 @@ h1 {
 }
 
 .pure-g {
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 }
 
 .small-font {

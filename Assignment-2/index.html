@@ -28,22 +28,41 @@
 
   <div class="page">
 
-    <!-- pure grid group -->
+    <div class="header">
+      <h1>Liveability in Malaysia</h1>
+      <p>In non pulvinar sapien, at cursus massa. Sed elit nunc, efficitur ut bibendum vitae, aliquam ut urna.
+        Sed congue malesuada risus, ut tempus mi sagittis nec. Ut vitae luctus lacus, eget imperdiet tortor.
+        Proin iaculis vehicula nunc, ut rutrum sapien eleifend nec. Nulla varius placerat dui. Donec sit amet nisi mauris.
+        Aliquam erat volutpat. Sed porta lorem imperdiet suscipit bibendum. Donec finibus est sodales ex euismod, id venenatis odio commodo.
+      </p>
+    </div>
+
     <div class="pure-g">
       <div class="pure-u-1-1">
-        <h1>Liveability in Malaysia</h1>
-        <p>This page demonstrates how you can use pure.css grid for your layout.</p>
+        <h2>Median Household Income by State (2022)</h2>
+      </div>
+      <div class="pure-u-1-1">
+        <div id="choropleth-map" class="vis-container"></div>
       </div>
     </div>
-    <!-- end pure grid group -->
 
-    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2>Consumer Price Index of Malaysian States (2016-2024)</h2>
+      </div>
+      <div class="pure-u-1-1">
+        <div id="line-chart-select"></div>
+      </div>
+      <div class="pure-u-1-1 flex">
+        <div id="line-chart" class="vis-container"></div>
+      </div>
+    </div>
+
     <div class="pure-g">
       <div class="pure-u-1-3">
         <div class="description description-left">
           <h2>Two Columns Layout</h2>
-          <p>The first column contains text and the second column contains a visualisation.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. </p>
         </div>
@@ -52,72 +71,40 @@
         <div id="vis1" class="vis-container"></div>
       </div>
     </div>
-    <!-- end pure grid group -->
 
-    <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-2-3">
         <div id="vis2" class="vis-container"></div>
       </div>
       <div class="pure-u-1-3">
         <div class="description description-right">
-          <h2>First and Second Columns Combined</h2>
-          <p>The first and second columns are combined. Lorem ipsum dolor sit amet,
+          <h2>First and Second</h2>
+          <p>Lorem ipsum dolor sit amet,
             consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa sapien
             faucibus et molestie ac feugiat sed. Egestas purus viverra accumsan in nisl.</p>
         </div>
       </div>
     </div>
-    <!-- end pure grid group -->
 
-    <div class="pure-g">
-      <div class="pure-u-1-1">
-        <h2>Consumer Price Index of Malaysian States (2016-2024)</h2>
-      </div>
-      <div class="pure-u-1-1 flex">
-        <div id="vis3" class="vis-container"></div>
-      </div>
+    <div class="footer small-font">
+      <p>
+        Liangdi Wang, 09/10/2024. Data from 
+        <a href="https://data.gov.my/" target=" _blank">data.gov.my</a>. Source code on
+        <a href="https://github.com/ligsnf/FIT3179/tree/main/Assignment-2" target=" _blank">GitHub</a>.
+      </p>
     </div>
-
-    <div class="pure-g">
-      <div class="pure-u-1-1">
-        <h2>Median Household Income by State (2022)</h2>
-      </div>
-      <div class="pure-u-1-1">
-        <div id="vis4" class="vis-container"></div>
-      </div>
-    </div>
-
-    <!-- pure grid group -->
-    <div class="pure-g">
-      <div class="pure-u-1-1 small-font">
-        <p>
-          Liangdi Wang, 09/10/2024. Data from 
-          <a href="https://data.gov.my/" target=" _blank">data.gov.my</a>. Source code on
-          <a href="https://github.com/ligsnf/FIT3179/tree/main/Assignment-2" target=" _blank">GitHub</a>.
-        </p>
-      </div>
-    </div>
-    <!-- end pure grid group -->
 
   </div> <!-- end page -->
 
   <script type="text/javascript">
     var choroplethMap = "js/choropleth_map.vg.json";
     var lineChart = "js/line_chart.vg.json";
-    var stackedBarChart = "js/normalised_stacked_bar_chart.vg.json";
 
-    vegaEmbed('#vis1', stackedBarChart, { "actions": false });
-
-    vegaEmbed('#vis2', stackedBarChart, { "actions": false }).then(function (result) {
+    vegaEmbed('#line-chart', lineChart, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#vis3', lineChart, { "actions": false }).then(function (result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
-
-    vegaEmbed('#vis4', choroplethMap, { "actions": false }).then(function (result) {
+    vegaEmbed('#choropleth-map', choroplethMap, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
