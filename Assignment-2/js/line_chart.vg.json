@@ -101,7 +101,7 @@
       },
       "encoding": {
         "x": {
-          "datum": {"year": 2020, "month": 4, "date": 1}, 
+          "datum": {"year": 2020, "month": 3, "date": 11}, 
           "type": "temporal"
         }
       }
@@ -110,13 +110,13 @@
       "mark": {
         "type": "text",
         "fontSize": 16,
-        "dx": 10,
+        "dx": 5,
         "align": "left"
       },
       "encoding": {
         "text": {"value": "COVID-19 Pandemic Begins"},
         "x": {
-          "datum": {"year": 2020, "month": 3, "date": 1}, 
+          "datum": {"year": 2020, "month": 3, "date": 11}, 
           "type": "temporal"
         },
         "y": {
