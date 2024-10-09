@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Liveability in Malaysia: Median Household Income by State (2022)",
   "width": 680,
   "height": 300,
   "data": {

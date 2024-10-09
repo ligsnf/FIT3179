@@ -3,7 +3,13 @@ body *{
 }
 
 h1 {
-  font-weight: 900;
+  font-weight: 700;
+  font-size: 3em;
+  font-family: 'Roboto Serif', serif;
+}
+
+h2 {
+  font-family: 'Roboto Serif', serif;
 }
 
 body {
@@ -23,8 +29,8 @@ body {
 .vis-container {
   flex-grow: 1;
   display: flex;
-  align-items: center;  /* Center map vertically */
-  justify-content: center;  /* Center map horizontally */
+  align-items: center;
+  justify-content: center;
 }
 
 .description h2,
@@ -46,4 +52,5 @@ h1 {
 
 .small-font {
   font-size: 14px;
+  color: gray;
 }
