@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 720,
-  "height": 302,
+  "width": 732,
+  "height": 306,
   "data": {
     "url": "js/ne_10m_malaysia_states.topojson",
     "format": {

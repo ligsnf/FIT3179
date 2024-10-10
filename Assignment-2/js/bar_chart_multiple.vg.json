@@ -1,0 +1,53 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A bar chart showing various cost of living indices for Malaysia from 2021 to 2024.",
+  "data": {
+    "url": "data/cost_of_living_index.csv"
+  },
+  "transform": [
+    {
+      "fold": [
+        "Cost of Living Index",
+        "Rent Index",
+        "Cost of Living plus Rent Index",
+        "Groceries Index",
+        "Restaurant Price Index",
+        "Local Purchasing Power Index"
+      ],
+      "as": ["IndexType", "Value"]
+    }
+  ],
+  "facet": {
+    "column": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null
+    }
+  },
+  "spec": {
+    "mark": "bar",
+    "width": 115,
+    "encoding": {
+      "x": {
+        "field": "IndexType",
+        "type": "nominal",
+        "axis": {"title": null, "labels": false}
+      },
+      "y": {
+        "field": "Value",
+        "type": "quantitative",
+        "axis": {"title": "Index Value"}
+      },
+      "color": {
+        "field": "IndexType",
+        "type": "nominal",
+        "legend": {"title": "Index Type"}
+      },
+      "tooltip": [
+        {"field": "year", "type": "ordinal", "title": "Year"},
+        {"field": "IndexType", "type": "nominal", "title": "Index Type"},
+        {"field": "Value", "type": "quantitative", "title": "Value"}
+      ]
+    }
+  }
+}

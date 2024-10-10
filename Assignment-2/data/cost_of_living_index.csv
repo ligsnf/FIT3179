@@ -1,5 +1,6 @@
-rank,country,year,cost of living index,rent index,cost of living plus rent index,groceries index,restaurant price index,local purchasing power index
+rank,country,year,Cost of Living Index,Rent Index,Cost of Living plus Rent Index,Groceries Index,Restaurant Price Index,Local Purchasing Power Index
 115,Malaysia,2024,30.5,8.2,19.9,35.4,18.3,62.1
 101,Malaysia,2023,35.0,9.8,22.9,36.7,20.5,65.7
 93,Malaysia,2022,37.0,9.9,24.3,39.4,20.8,55.3
 90,Malaysia,2021,39.5,10.8,25.8,40.2,21.7,56.1
+76,Malaysia,2019,39.4,10.9,25.7,39.7,22.7,73.1
