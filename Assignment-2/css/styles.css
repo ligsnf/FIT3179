@@ -2,6 +2,22 @@ body *{
   font-family: 'Open Sans', sans-serif;
 }
 
+body {
+  position: relative;
+}
+
+body::before {    
+  content: "";
+  background-image: linear-gradient(120deg, #010066 3%, #ffcc00 50%, #cc0001 97%);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.5; /* Adjust the opacity */
+  z-index: -1; /* Ensure the background stays behind all content */
+}
+
 h1, h1 span {
   font-weight: 700;
   font-size: 48px;
@@ -12,20 +28,16 @@ h2 {
   font-family: 'Roboto Serif', serif;
 }
 
-body {
-  background-color: lightgray;
-  background-image: linear-gradient(120deg, #010066 3%, #ffcc00 50%, #cc0001 97%);
-  
-}
-
 .page {
+  position: relative; /* To ensure it is above the background */
   width: 850px;
   background-color: white;
-  box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.75);
   margin: auto;
   padding: 50px;
   padding-top: 35px;
   padding-bottom: 35px;
+  z-index: 1; /* Ensure it's above the background */
 }
 
 .flex {
