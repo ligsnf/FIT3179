@@ -41,7 +41,7 @@
       "title": "Purchasing Power Index",
       "axis": {"tickCount": 7},
       "scale": {
-        "domain": [0, 125]
+        "domain": [0, 120]
       }
     },
     "y": {
@@ -67,18 +67,18 @@
         "x": {
           "datum": 0,
           "type": "quantitative",
-          "scale": {"domain": [0, 125]}
+          "scale": {"domain": [0, 120]}
         },
         "x2": {
-          "datum": 125
+          "datum": 120
         },
         "y": {
           "datum": 0,
           "type": "quantitative",
-          "scale": {"domain": [0, 130]}
+          "scale": {"domain": [0, 120]}
         },
         "y2": {
-          "datum": 130
+          "datum": 120
         }
       }
     },
@@ -96,7 +96,7 @@
         "color": {"value": "black"},
         "opacity": {
           "condition": {
-            "test": "datum['Country'] == 'Singapore' || datum['Country'] == 'Malaysia' || datum['Country'] == 'China' || datum['Country'] == 'Japan' || datum['Country'] == 'South Korea' || datum['Country'] == 'Taiwan' || datum['Country'] == 'Indonesia' || datum['Country'] == 'Thailand' || datum['Country'] == 'Vietnam' || datum['Country'] == 'Hong Kong' || datum['Country'] == 'India'",
+            "test": "datum['Country'] == 'Singapore' || datum['Country'] == 'Malaysia' || datum['Country'] == 'China' || datum['Country'] == 'Japan' || datum['Country'] == 'South Korea' || datum['Country'] == 'Taiwan' || datum['Country'] == 'Indonesia' || datum['Country'] == 'Thailand' || datum['Country'] == 'Vietnam' || datum['Country'] == 'Hong Kong' || datum['Country'] == 'India' || datum['Country'] == 'Pakistan'",
             "value": 1
           },
           "value": 0
@@ -121,7 +121,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
-            "range": ["#e41a1c", "#984ea3", "#ff7f00", "#a6cee3", "#377eb8", "#a65628"]
+            "range": ["#D81B60", "#00364D", "#FFC107", "#774F17", "#1E88E5", "#938ACE"]
           }
         },
         "opacity": {"value": 0.6},
