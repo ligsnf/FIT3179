@@ -14,6 +14,7 @@ output:
 library(knitr)
 library(tidyverse)
 library(lubridate)
+library(rvest)
 ```
 
 ### Filter Data to reduce size
@@ -22,7 +23,7 @@ Download the data from [data.gov.my](https://data.gov.my/data-catalogue/cpi_stat
 
 ```{r}
 # Read in the data
-cpi_2d_state <- read_csv("./data/cpi_2d_state.csv")
+cpi_2d_state <- read_csv("./data/cpi_2d_state.csv", show_col_types = FALSE)
 
 # Filter the data to include dates after 2016-08-01
 cpi_2d_state_filtered <- cpi_2d_state %>%
@@ -30,4 +31,38 @@ cpi_2d_state_filtered <- cpi_2d_state %>%
 
 # Write the filtered data to a new CSV file
 write_csv(cpi_2d_state_filtered, "./data/cpi_2d_state_filtered.csv")
+```
+
+### Scrape Quality of Life data
+
+```{r}
+# Store Quality of Life Index URL
+qol_2022_url <- "https://www.numbeo.com/quality-of-life/rankings_by_country.jsp?title=2022"
+
+# Scrape Quality of Life Index data
+qol_2022_page <- read_html(qol_2022_url)
+
+# Extract the Historical rankings table
+qol_2022_tables <- html_elements(qol_2022_page, "#t2") %>% html_table()
+qol_index_2022 <- qol_2022_tables[[1]]
+qol_index_2022 <- qol_index_2022 %>% select(-Rank)
+
+# Join Continent Column
+country_continent <- read_csv("./data/country_continent.csv", show_col_types = FALSE)
+qol_index_2022 <- qol_index_2022 %>%
+  left_join(country_continent, by = "Country")
+
+# Join Population Column
+country_population_2022 <- read_csv("./data/country_population_2022.csv", show_col_types = FALSE)
+qol_index_2022 <- qol_index_2022 %>%
+  left_join(country_population_2022, by = "Country")
+
+# Write the cleaned data to a CSV
+write_csv(qol_index_2022, "./data/qol_index_2022.csv")
+```
+
+### Test
+
+```{r}
+
 ```

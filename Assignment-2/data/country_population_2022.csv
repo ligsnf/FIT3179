@@ -1,0 +1,267 @@
+Country,Population
+Afghanistan,41128771
+Albania,2777689
+Algeria,44903225
+American Samoa,44273
+Andorra,79824
+Angola,35588987
+Antigua and Barbuda,93763
+Argentina,46234830
+Armenia,2780469
+Aruba,106445
+Australia,26014399
+Austria,9041851
+Azerbaijan,10141756
+"Bahamas, The",409984
+Bahrain,1472233
+Bangladesh,171186372
+Barbados,281635
+Belarus,9228071
+Belgium,11685814
+Belize,405272
+Benin,13352864
+Bermuda,63595
+Bhutan,782455
+Bolivia,12224110
+Bosnia And Herzegovina,3233526
+Botswana,2630296
+Brazil,215313498
+British Virgin Islands,31305
+Brunei Darussalam,449002
+Bulgaria,6465097
+Burkina Faso,22673762
+Burundi,12889576
+Cabo Verde,593149
+Cambodia,16767842
+Cameroon,27914536
+Canada,38939056
+Cayman Islands,68706
+Central African Republic,5579144
+Chad,17723315
+Channel Islands,174079
+Chile,19603733
+China,1412175000
+Colombia,51874024
+Comoros,836774
+"Congo, Dem. Rep.",99010212
+"Congo, Rep.",5970424
+Costa Rica,5180829
+Cote d'Ivoire,28160542
+Croatia,3855641
+Cuba,11212191
+Curacao,149996
+Cyprus,1251488
+Czech Republic,10672118
+Denmark,5903037
+Djibouti,1120849
+Dominica,72737
+Dominican Republic,11228821
+Ecuador,18001000
+Egypt,110990103
+El Salvador,6336392
+Equatorial Guinea,1674908
+Eritrea,3684032
+Estonia,1348840
+Eswatini,1201670
+Ethiopia,123379924
+Faroe Islands,53090
+Fiji,929766
+Finland,5556106
+France,67971311
+French Polynesia,306279
+Gabon,2388992
+"Gambia, The",2705992
+Georgia,3712502
+Germany,83797985
+Ghana,33475870
+Gibraltar,32649
+Greece,10426919
+Greenland,56661
+Grenada,125438
+Guam,171774
+Guatemala,17357886
+Guinea,13859341
+Guinea-Bissau,2105566
+Guyana,808726
+Haiti,11584996
+Honduras,10432860
+Hong Kong,7346100
+Hungary,9643048
+Iceland,382003
+India,1417173173
+Indonesia,275501339
+Iran,88550570
+Iraq,44496122
+Ireland,5127170
+Isle of Man,84519
+Israel,9557500
+Italy,58940425
+Jamaica,2827377
+Japan,125124989
+Jordan,11285869
+Kazakhstan,19634983
+Kenya,54027487
+Kiribati,131232
+North Korea,26069416
+South Korea,51672569
+Kosovo,1768086
+Kuwait,4268873
+Kyrgyz Republic,6974900
+Lao PDR,7529475
+Latvia,1879383
+Lebanon,5489739
+Lesotho,2305825
+Liberia,5302681
+Libya,6812341
+Liechtenstein,39327
+Lithuania,2831639
+Luxembourg,653103
+"Macao SAR, China",695168
+Madagascar,29611714
+Malawi,20405317
+Malaysia,33938221
+Maldives,523787
+Mali,22593590
+Malta,531113
+Marshall Islands,41569
+Mauritania,4736139
+Mauritius,1262523
+Mexico,127504125
+"Micronesia, Fed. Sts.",114164
+Moldova,2538894
+Monaco,36469
+Mongolia,3398366
+Montenegro,617213
+Morocco,37457971
+Mozambique,32969518
+Myanmar,54179306
+Namibia,2567012
+Nauru,12668
+Nepal,30547580
+Netherlands,17700982
+New Caledonia,269215
+New Zealand,5117200
+Nicaragua,6948392
+Niger,26207977
+Nigeria,218541212
+North Macedonia,1831712
+Northern Mariana Islands,49551
+Norway,5457127
+Oman,4576298
+Pakistan,235824862
+Palau,18055
+Panama,4408581
+Papua New Guinea,10142619
+Paraguay,6780744
+Peru,34049588
+Philippines,115559009
+Poland,36821749
+Portugal,10409704
+Puerto Rico,3220113
+Qatar,2695122
+Romania,19047009
+Russia,144236933
+Rwanda,13776698
+Samoa,222382
+San Marino,33660
+Sao Tome and Principe,227380
+Saudi Arabia,36408820
+Senegal,17316449
+Serbia,6664449
+Seychelles,119878
+Sierra Leone,8605718
+Singapore,5637022
+Sint Maarten (Dutch part),40888
+Slovakia,5431752
+Slovenia,2111986
+Solomon Islands,724273
+Somalia,17597511
+South Africa,59893885
+South Sudan,10913164
+Spain,47778340
+Sri Lanka,22181000
+St. Kitts and Nevis,47657
+St. Lucia,179857
+St. Martin (French part),31791
+St. Vincent and the Grenadines,103948
+Sudan,46874204
+Suriname,618040
+Sweden,10486941
+Switzerland,8775760
+Syrian Arab Republic,22125249
+Tajikistan,9952787
+Tanzania,65497748
+Thailand,71697030
+Timor-Leste,1341296
+Togo,8848699
+Tonga,106858
+Trinidad and Tobago,1531044
+Tunisia,12356117
+Turkey,84979913
+Turkmenistan,6430770
+Turks and Caicos Islands,45703
+Tuvalu,11312
+Uganda,47249585
+Ukraine,38000000
+United Arab Emirates,9441129
+United Kingdom,67791000
+United States,333271411
+Uruguay,3422794
+Uzbekistan,35648100
+Vanuatu,326740
+Venezuela,28301696
+Vietnam,98186856
+Virgin Islands (U.S.),105413
+West Bank and Gaza,5043612
+"Yemen, Rep.",33696614
+Zambia,20017675
+Zimbabwe,16320537
+Africa Eastern and Southern,720859132
+Africa Western and Central,490330870
+Arab World,464684914
+Caribbean small states,3147057
+Central Europe and the Baltics,100108262
+Early-demographic dividend,3447398652
+East Asia & Pacific,2375208613
+East Asia & Pacific (excluding high income),2129094071
+East Asia & Pacific (IDA & IBRD countries),2103055378
+Euro area,348331552
+Europe & Central Asia,920988359
+Europe & Central Asia (excluding high income),246915820
+Europe & Central Asia (IDA & IBRD countries),457342249
+European Union,447370551
+Fragile and conflict affected situations,1019145355
+Heavily indebted poor countries (HIPC),884288332
+High income,1395940386
+IBRD only,4912348798
+IDA & IBRD total,6754104791
+IDA blend,609342910
+IDA only,1232413083
+IDA total,1841755993
+Late-demographic dividend,2325328254
+Latin America & Caribbean,659306928
+Latin America & Caribbean (excluding high income),596596955
+Latin America & the Caribbean (IDA & IBRD countries),643884393
+Least developed countries: UN classification,1124396999
+Low & middle income,6527353351
+Low income,703727949
+Lower middle income,3020375650
+Middle East & North Africa,493279469
+Middle East & North Africa (excluding high income),424328381
+Middle East & North Africa (IDA & IBRD countries),419284769
+Middle income,5823625402
+North America,372274062
+Not classified,..
+OECD members,1377465841
+Other small states,14095313
+Pacific island small states,2639019
+Post-demographic dividend,1114354147
+Pre-demographic dividend,1038012552
+Small states,19881389
+South Asia,1919348000
+South Asia (IDA & IBRD),1919348000
+Sub-Saharan Africa,1211190002
+Sub-Saharan Africa (excluding high income),1211070124
+Sub-Saharan Africa (IDA & IBRD countries),1211190002
+Upper middle income,2803249752
+World,7951595433

@@ -1,0 +1,137 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 400,
+  "description": "Cost of Living vs. Purchasing Power Index (2022)",
+  "data": {
+    "url": "data/qol_index_2022.csv"
+  },
+  "params": [
+    {
+      "name": "Population_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100000000,
+        "step": 1000000,
+        "name": "Minimum Population: "
+      }
+    },
+    {
+      "name": "Continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [null, "North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
+        "labels": ["Show All", "North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
+        "name": "Continent Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.Population > Population_Above"},
+    {
+      "filter": "Continent_selection == null || datum.Continent == Continent_selection"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Purchasing Power Index",
+      "type": "quantitative",
+      "title": "Purchasing Power Index",
+      "axis": {"tickCount": 7},
+      "scale": {
+        "domain": [0, 125]
+      }
+    },
+    "y": {
+      "field": "Cost of Living Index",
+      "type": "quantitative",
+      "title": "Cost of Living Index",
+      "axis": {"tickCount": 6},
+      "scale": {
+        "domain": [0, 130]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeDash": [4, 4],
+        "color": "grey",
+        "strokeWidth": 2,
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "datum": 0,
+          "type": "quantitative",
+          "scale": {"domain": [0, 125]}
+        },
+        "x2": {
+          "datum": 125
+        },
+        "y": {
+          "datum": 0,
+          "type": "quantitative",
+          "scale": {"domain": [0, 130]}
+        },
+        "y2": {
+          "datum": 130
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "Country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Country'] == 'Singapore' || datum['Country'] == 'Malaysia' || datum['Country'] == 'China' || datum['Country'] == 'Japan' || datum['Country'] == 'South Korea' || datum['Country'] == 'Taiwan' || datum['Country'] == 'Indonesia' || datum['Country'] == 'Thailand' || datum['Country'] == 'Vietnam' || datum['Country'] == 'Hong Kong' || datum['Country'] == 'India'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": "circle",
+      "encoding": {
+        "size": {
+          "field": "Population",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
+            "range": [10, 50, 150, 200, 300, 400]
+          },
+          "legend": {"format": ".1s"}
+        },
+        "color": {
+          "field": "Continent",
+          "type": "nominal",
+          "scale": {
+            "domain": ["North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
+            "range": ["#e41a1c", "#984ea3", "#ff7f00", "#a6cee3", "#377eb8", "#a65628"]
+          }
+        },
+        "opacity": {"value": 0.6},
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {"field": "Cost of Living Index", "type": "quantitative", "format": ","},
+          {"field": "Purchasing Power Index", "type": "quantitative", "format": ","},
+          {"field": "Population", "type": "quantitative", "format": ","}
+        ]
+      }
+    }
+  ]
+}

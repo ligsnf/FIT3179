@@ -29,12 +29,30 @@
   <div class="page">
 
     <div class="header">
-      <h1>Liveability in Malaysia 🇲🇾</h1>
+      <h1>🤔 Where should I live in Malaysia? 🇲🇾</h1>
       <p>In non pulvinar sapien, at cursus massa. Sed elit nunc, efficitur ut bibendum vitae, aliquam ut urna.
         Sed congue malesuada risus, ut tempus mi sagittis nec. Ut vitae luctus lacus, eget imperdiet tortor.
         Proin iaculis vehicula nunc, ut rutrum sapien eleifend nec. Nulla varius placerat dui. Donec sit amet nisi mauris.
         Aliquam erat volutpat. Sed porta lorem imperdiet suscipit bibendum. Donec finibus est sodales ex euismod, id venenatis odio commodo.
       </p>
+    </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2>Cost of Living vs Purchasing Power Index (2022)</h2>
+      </div>
+      <div class="pure-u-1-1">
+        <div id="scatter-plot" class="vis-container"></div>
+      </div>
+    </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2>Cost of Living Indices in Malaysia (2019-2024)</h2>
+      </div>
+      <div class="pure-u-1-1 flex">
+        <div id="bar-chart-multiple" class="vis-container"></div>
+      </div>
     </div>
 
     <div class="pure-g">
@@ -55,15 +73,6 @@
       </div>
       <div class="pure-u-1-1 flex">
         <div id="line-chart" class="vis-container"></div>
-      </div>
-    </div>
-
-    <div class="pure-g">
-      <div class="pure-u-1-1">
-        <h2>Cost of Living Indices in Malaysia (2019-2024)</h2>
-      </div>
-      <div class="pure-u-1-1 flex">
-        <div id="bar-chart-multiple" class="vis-container"></div>
       </div>
     </div>
 
@@ -106,9 +115,14 @@
   </div> <!-- end page -->
 
   <script type="text/javascript">
+    var scatterPlot = "js/scatter_plot.vg.json";
     var choroplethMap = "js/choropleth_map.vg.json";
     var lineChart = "js/line_chart.vg.json";
     var barChartMultiple = "js/bar_chart_multiple.vg.json";
+
+    vegaEmbed('#scatter-plot', scatterPlot, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
 
     vegaEmbed('#line-chart', lineChart, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
