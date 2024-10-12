@@ -1,5 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Liveability of States in Malaysia (2022) based on Income minus Expenditure",
   "width": 732,
   "height": 306,
   "data": {
@@ -78,9 +79,14 @@
             },
             "key": "state",
             "fields": [
-              "income_median"
+              "income_mean",
+              "expenditure_mean"
             ]
           }
+        },
+        {
+          "calculate": "datum.income_mean - datum.expenditure_mean",
+          "as": "net_income"
         }
       ],
       "mark": {
@@ -90,12 +96,12 @@
       },
       "encoding": {
         "color": {
-          "title": "Median Income (MYR)",
-          "field": "income_median",
+          "title": "Net Income (MYR)",
+          "field": "net_income",
           "type": "quantitative", 
           "scale": {
             "type": "threshold",
-            "domain": [4000, 5000, 6000, 9000],
+            "domain": [1500, 2000, 2800, 5000],
             "range": ["#edf8e9", "#bae4b3", "#74c476", "#31a354", "#006d2c"]
           },
           "legend": {
@@ -109,8 +115,20 @@
             "type": "nominal"
           },
           {
-            "title": "Median Income",
-            "field": "income_median",
+            "title": "Income (Mean)",
+            "field": "income_mean",
+            "type": "quantitative",
+            "format": ",.0f"
+          },
+          {
+            "title": "Expenditure (Mean)",
+            "field": "expenditure_mean",
+            "type": "quantitative",
+            "format": ",.0f"
+          },
+          {
+            "title": "Net Income",
+            "field": "net_income",
             "type": "quantitative",
             "format": ",.0f"
           }
