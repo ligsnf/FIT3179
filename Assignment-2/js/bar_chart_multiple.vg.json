@@ -1,26 +1,33 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A bar chart showing various cost of living indices for Malaysia from 2021 to 2024.",
+  "description": "A small multiples bar chart showing various quality of life indices for Malaysia, Singapore, and Japan in 2022.",
   "data": {
-    "url": "data/cost_of_living_index.csv"
+    "url": "data/quality_of_life_index_2022.csv"
   },
   "transform": [
     {
+      "filter": {
+        "field": "Country",
+        "oneOf": ["Malaysia", "Singapore", "Japan", "South Korea", "China"]
+      }
+    },
+    {
       "fold": [
-        "Cost of Living Index",
-        "Rent Index",
-        "Cost of Living plus Rent Index",
-        "Groceries Index",
-        "Restaurant Price Index",
-        "Local Purchasing Power Index"
+        "Quality of Life Index",
+        "Safety Index",
+        "Health Care Index",
+        "Property Price to Income Ratio",
+        "Traffic Commute Time Index",
+        "Pollution Index",
+        "Climate Index"
       ],
       "as": ["IndexType", "Value"]
     }
   ],
   "facet": {
     "column": {
-      "field": "year",
-      "type": "ordinal",
+      "field": "Country",
+      "type": "nominal",
       "title": null
     }
   },
@@ -31,7 +38,16 @@
       "x": {
         "field": "IndexType",
         "type": "nominal",
-        "axis": {"title": null, "labels": false}
+        "axis": {"title": null, "labels": false},
+        "sort": [
+          "Quality of Life Index",
+          "Safety Index",
+          "Health Care Index",
+          "Property Price to Income Ratio",
+          "Traffic Commute Time Index",
+          "Pollution Index",
+          "Climate Index"
+        ]
       },
       "y": {
         "field": "Value",
@@ -41,10 +57,22 @@
       "color": {
         "field": "IndexType",
         "type": "nominal",
+        "scale": {
+          "domain": [
+            "Quality of Life Index",
+            "Safety Index",
+            "Health Care Index",
+            "Property Price to Income Ratio",
+            "Traffic Commute Time Index",
+            "Pollution Index",
+            "Climate Index"
+          ],
+          "range": ["#54a34b", "#4c78a8", "#b379a2", "#edca3b", "#f28518", "#774806", "#72b8b3"]
+        },
         "legend": {"title": "Index Type"}
       },
       "tooltip": [
-        {"field": "year", "type": "ordinal", "title": "Year"},
+        {"field": "Country", "type": "nominal", "title": "Country"},
         {"field": "IndexType", "type": "nominal", "title": "Index Type"},
         {"field": "Value", "type": "quantitative", "title": "Value"}
       ]

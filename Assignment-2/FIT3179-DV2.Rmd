@@ -58,7 +58,7 @@ qol_index_2022 <- qol_index_2022 %>%
   left_join(country_population_2022, by = "Country")
 
 # Write the cleaned data to a CSV
-write_csv(qol_index_2022, "./data/qol_index_2022.csv")
+write_csv(qol_index_2022, "./data/quality_of_life_index_2022.csv")
 ```
 
 ### Test

@@ -4,7 +4,7 @@
   "height": 400,
   "description": "Cost of Living vs. Purchasing Power Index (2022)",
   "data": {
-    "url": "data/qol_index_2022.csv"
+    "url": "data/quality_of_life_index_2022.csv"
   },
   "params": [
     {
