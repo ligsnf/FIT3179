@@ -170,6 +170,144 @@
           }
         ]
       }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {"calculate": "101.8", "as": "longitude"},
+        {"calculate": "3.1", "as": "latitude"},
+        {"calculate": "105", "as": "longitude2"},
+        {"calculate": "3.1", "as": "latitude2"},
+        {"calculate": "datum.properties.NAME", "as": "annotationText"}
+      ],
+      "mark": {"type": "rule", "stroke": "#d94801", "strokeWidth": 2},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "longitude2": {"field": "longitude2"},
+        "latitude2": {"field": "latitude2"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "split('Selangor region has the \\nhighest net income by far', '\\n')",
+          "as": "annotationText"
+        },
+        {"calculate": "105.2", "as": "longitude"},
+        {"calculate": "3.3", "as": "latitude"}
+      ],
+      "mark": {"type": "text", "dx": 0, "dy": 0, "color": "#d94801", "align": "left"},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "text": {"field": "annotationText"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {"calculate": "102.2", "as": "longitude"},
+        {"calculate": "5.4", "as": "latitude"},
+        {"calculate": "105", "as": "longitude2"},
+        {"calculate": "5.4", "as": "latitude2"},
+        {"calculate": "datum.properties.NAME", "as": "annotationText"}
+      ],
+      "mark": {"type": "rule", "stroke": "#d94801", "strokeWidth": 2},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "longitude2": {"field": "longitude2"},
+        "latitude2": {"field": "latitude2"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "split('Kelantan has the \\nlowest net income', '\\n')",
+          "as": "annotationText"
+        },
+        {"calculate": "105.2", "as": "longitude"},
+        {"calculate": "5.6", "as": "latitude"}
+      ],
+      "mark": {"type": "text", "dx": 0, "dy": 0, "color": "#d94801", "align": "left"},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "text": {"field": "annotationText"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {"calculate": "114.7", "as": "longitude"},
+        {"calculate": "4.6", "as": "latitude"},
+        {"calculate": "112.7", "as": "longitude2"},
+        {"calculate": "5.4", "as": "latitude2"},
+        {"calculate": "datum.properties.NAME", "as": "annotationText"}
+      ],
+      "mark": {"type": "rule", "stroke": "#d94801", "strokeWidth": 2},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "longitude2": {"field": "longitude2"},
+        "latitude2": {"field": "latitude2"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "split('Eastern island \\nlies in the middle', '\\n')",
+          "as": "annotationText"
+        },
+        {"calculate": "110.2", "as": "longitude"},
+        {"calculate": "5.7", "as": "latitude"}
+      ],
+      "mark": {"type": "text", "dx": 0, "dy": 0, "color": "#d94801", "align": "left"},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "text": {"field": "annotationText"}
+      }
     }
   ]
 }
