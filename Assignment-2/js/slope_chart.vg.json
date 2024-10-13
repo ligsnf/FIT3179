@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": {"step": 100},
+  "width": 300,
   "data": {
     "url": "data/human_development_index.csv"
   },
@@ -9,23 +9,6 @@
       "filter": {
         "field": "state",
         "oneOf": ["Selangor", "Kuala Lumpur", "Pulau Pinang", "Johor", "Sabah", "Sarawak"]
-      }
-    },
-    {
-      "lookup": "state",
-      "from": {
-        "data": {
-          "values": [
-            {"state": "Selangor", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Flag_of_Selangor.svg/800px-Flag_of_Selangor.svg.png"},
-            {"state": "Kuala Lumpur", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Flag_of_Kuala_Lumpur%2C_Malaysia.svg/800px-Flag_of_Kuala_Lumpur%2C_Malaysia.svg.png"},
-            {"state": "Pulau Pinang", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flag_of_Penang_%28Malaysia%29.svg/800px-Flag_of_Penang_%28Malaysia%29.svg.png"},
-            {"state": "Johor", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Flag_of_Johor.svg/800px-Flag_of_Johor.svg.png"},
-            {"state": "Sabah", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Flag_of_Sabah.svg/800px-Flag_of_Sabah.svg.png"},
-            {"state": "Sarawak", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Flag_of_Sarawak.svg/800px-Flag_of_Sarawak.svg.png"}
-          ]
-        },
-        "key": "state",
-        "fields": ["flag_url"]
       }
     }
   ],
@@ -44,7 +27,7 @@
           "title": "HDI (Human Development Index)",
           "type": "quantitative",
           "scale": {
-            "domain": [0.73, 0.9]
+            "domain": [0.75, 0.9]
           }
         },
         "color": {"field": "state", "title": "State", "type": "nominal"}
@@ -52,9 +35,9 @@
     },
     {
       "mark": {
-        "type": "image",
-        "width": 30,
-        "height": 30
+        "type": "circle",
+        "size": 200,
+        "opacity": 1
       },
       "encoding": {
         "x": {
@@ -65,15 +48,72 @@
           "field": "index",
           "type": "quantitative"
         },
-        "url": {
-          "field": "flag_url",
-          "type": "nominal"
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Selangor", "Kuala Lumpur", "Pulau Pinang", "Johor", "Sabah", "Sarawak"],
+            "range": ["#edca3b", "#f28518", "#774f17", "#55a34b", "#72b8b2", "#4c78a8"]
+          }
         },
         "tooltip": [
           {"field": "state", "title": "State", "type": "nominal"},
           {"field": "year", "title": "Year", "type": "ordinal"},
           {"field": "index", "title": "HDI", "type": "quantitative"}
         ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [5, 5],
+        "color": "black"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0.8,
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "color": "#ab60a5"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0.782,
+          "type": "quantitative"
+        },
+        "x": {
+          "datum": 2022,
+          "type": "ordinal"
+        },
+        "text": {
+          "value": "High Human Development"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "color": "#56449c"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0.807,
+          "type": "quantitative"
+        },
+        "x": {
+          "datum": 2022,
+          "type": "ordinal"
+        },
+        "text": {
+          "value": "Very High Human Development"
+        }
       }
     }
   ]
