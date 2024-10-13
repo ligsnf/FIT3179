@@ -98,27 +98,29 @@
 
     <div class="pure-g">
       <div class="pure-u-1-1">
-        <h2>Consumer Price Index of Malaysian States (2016-2024)</h2>
+        <h2>Human Development Index by State</h2>
       </div>
-      <div class="pure-u-1-1">
-        <div id="line-chart-select"></div>
-      </div>
-      <div class="pure-u-1-1 flex">
-        <div id="line-chart" class="vis-container"></div>
-      </div>
-    </div>
-
-    <div class="pure-g">
       <div class="pure-u-1-3">
         <div class="description description-left">
-          <h2>Left Column</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. </p>
         </div>
       </div>
       <div class="pure-u-2-3">
-        <div id="vis1" class="vis-container"></div>
+        <div id="slope-chart" class="vis-container"></div>
+      </div>
+    </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2>Consumer Price Index of Malaysian States</h2>
+      </div>
+      <div class="pure-u-1-1">
+        <div id="line-chart-select"></div>
+      </div>
+      <div class="pure-u-1-1 flex">
+        <div id="line-chart" class="vis-container"></div>
       </div>
     </div>
 
@@ -148,15 +150,16 @@
 
   <script type="text/javascript">
     var scatterPlot = "js/scatter_plot.vg.json";
-    var choroplethMap = "js/choropleth_map.vg.json";
-    var lineChart = "js/line_chart.vg.json";
     var barChartMultiple = "js/bar_chart_multiple.vg.json";
+    var choroplethMap = "js/choropleth_map.vg.json";
+    var slopeChart = "js/slope_chart.vg.json";
+    var lineChart = "js/line_chart.vg.json";
 
     vegaEmbed('#scatter-plot', scatterPlot, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#line-chart', lineChart, { "actions": false }).then(function (result) {
+    vegaEmbed('#bar-chart-multiple', barChartMultiple, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
@@ -164,9 +167,14 @@
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#bar-chart-multiple', barChartMultiple, { "actions": false }).then(function (result) {
+    vegaEmbed('#slope-chart', slopeChart, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
+        
+    vegaEmbed('#line-chart', lineChart, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
   </script>
 </body>
 

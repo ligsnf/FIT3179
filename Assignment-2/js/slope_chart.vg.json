@@ -1,0 +1,80 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": {"step": 100},
+  "data": {
+    "url": "data/human_development_index.csv"
+  },
+  "transform": [
+    {
+      "filter": {
+        "field": "state",
+        "oneOf": ["Selangor", "Kuala Lumpur", "Pulau Pinang", "Johor", "Sabah", "Sarawak"]
+      }
+    },
+    {
+      "lookup": "state",
+      "from": {
+        "data": {
+          "values": [
+            {"state": "Selangor", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Flag_of_Selangor.svg/800px-Flag_of_Selangor.svg.png"},
+            {"state": "Kuala Lumpur", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Flag_of_Kuala_Lumpur%2C_Malaysia.svg/800px-Flag_of_Kuala_Lumpur%2C_Malaysia.svg.png"},
+            {"state": "Pulau Pinang", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flag_of_Penang_%28Malaysia%29.svg/800px-Flag_of_Penang_%28Malaysia%29.svg.png"},
+            {"state": "Johor", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Flag_of_Johor.svg/800px-Flag_of_Johor.svg.png"},
+            {"state": "Sabah", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Flag_of_Sabah.svg/800px-Flag_of_Sabah.svg.png"},
+            {"state": "Sarawak", "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Flag_of_Sarawak.svg/800px-Flag_of_Sarawak.svg.png"}
+          ]
+        },
+        "key": "state",
+        "fields": ["flag_url"]
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "x": {
+          "field": "year",
+          "title": "Year",
+          "type": "ordinal",
+          "scale": {"padding": 0.5}
+        },
+        "y": {
+          "field": "index",
+          "title": "HDI (Human Development Index)",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0.73, 0.9]
+          }
+        },
+        "color": {"field": "state", "title": "State", "type": "nominal"}
+      }
+    },
+    {
+      "mark": {
+        "type": "image",
+        "width": 30,
+        "height": 30
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "index",
+          "type": "quantitative"
+        },
+        "url": {
+          "field": "flag_url",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {"field": "state", "title": "State", "type": "nominal"},
+          {"field": "year", "title": "Year", "type": "ordinal"},
+          {"field": "index", "title": "HDI", "type": "quantitative"}
+        ]
+      }
+    }
+  ]
+}
