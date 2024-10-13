@@ -1,21 +1,50 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Liveability of States in Malaysia (2022) based on Income minus Expenditure",
+  "description": "Liveability of States in Malaysia (2022) based on Net Income",
   "width": 732,
-  "height": 306,
-  "data": {
-    "url": "js/ne_10m_malaysia_states.topojson",
-    "format": {
-      "type": "topojson",
-      "feature": "ne_10m_admin_1_states_provinces"
+  "height": 312,
+  "params": [
+    {
+      "name": "zoom_level",
+      "value": 2000,
+      "bind": {
+        "input": "range",
+        "min": 2000,
+        "max": 15000,
+        "step": 100,
+        "name": "Zoom: "
+      } 
+    },
+    {
+      "name": "center_to",
+      "value": [109.93, 4.01],
+      "bind": {
+        "input": "select",
+        "options": [
+          [109.93, 4.01],
+          [101.7, 3.1],
+          [115.7, 4.6],
+          [100.3, 5.4]
+        ],
+        "labels": ["Centre", "Kuala Lumpur", "Sarawak", "Pilau Pinang"],
+        "name": "Map Centre: "
+      }
     }
-  },
+  ],
   "projection": {
-    "type": "identity",
-    "reflectY": true
+    "type": "equirectangular",
+    "center": { "expr": "center_to" },
+    "scale": { "expr": "zoom_level" }
   },
   "layer": [
     {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
       "transform": [
         {
           "calculate": "'Data is not available in ' + datum.properties.name",
@@ -70,6 +99,13 @@
       }
     },
     {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
       "transform": [
         {
           "lookup": "properties.name",
