@@ -132,6 +132,44 @@
           {"field": "Population", "type": "quantitative", "format": ","}
         ]
       }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 14,
+        "color": "orange"
+      },
+      "encoding": {
+        "x": {
+          "datum": 5
+        },
+        "y": {
+          "datum": 110
+        },
+        "text": {
+          "value": "High Cost, Low Purchasing Power"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 14,
+        "color": "green"
+      },
+      "encoding": {
+        "x": {
+          "datum": 80
+        },
+        "y": {
+          "datum": 10
+        },
+        "text": {
+          "value": "Low Cost, High Purchasing Power"
+        }
+      }
     }
   ]
 }
