@@ -61,8 +61,51 @@ qol_index_2022 <- qol_index_2022 %>%
 write_csv(qol_index_2022, "./data/quality_of_life_index_2022.csv")
 ```
 
-### Test
+### Clean State Population Data
 
 ```{r}
+population_state <- read_csv("./data/population_state.csv", show_col_types = FALSE)
+population_state <- population_state %>%
+  filter(sex == "both", age == "overall", ethnicity == "overall") %>%
+  mutate(population = round(population * 1000)) %>%
+  mutate(state = case_when(
+    state == "W.P. Putrajaya" ~ "Putrajaya",
+    state == "W.P. Labuan" ~ "Labuan",
+    state == "W.P. Kuala Lumpur" ~ "Kuala Lumpur",
+    TRUE ~ state
+  ))
+write_csv(population_state, "./data/population_state_malaysia.csv")
+```
 
+### Scrape State Land Area Data
+
+```{r}
+# Store State Area URL
+state_area_url <- "https://simple.wikipedia.org/wiki/States_of_Malaysia"
+
+# Scrape State Area data
+state_area_page <- read_html(state_area_url)
+
+# Extract the State Area table
+state_area_tables <- html_elements(state_area_page, "table.wikitable") %>% html_table()
+state_area <- state_area_tables[[1]]
+
+# Clean
+state_area <- state_area %>%
+  mutate(area = as.numeric(gsub(",", "", `Area (km²)[2]`))) %>%  # Remove commas and convert to numeric
+  mutate(state = Name) %>%
+  select(state, area)
+
+write_csv(state_area, "./data/state_area_malaysia.csv")
+```
+
+### Join
+
+```{r}
+state_area <- read_csv("./data/state_area_malaysia.csv", show_col_types = FALSE)
+population_state_area <- population_state %>%
+  left_join(state_area, by = "state") %>%
+  select(-sex, -age, -ethnicity)
+
+write_csv(population_state_area, "./data/state_population_area_malaysia.csv")
 ```
