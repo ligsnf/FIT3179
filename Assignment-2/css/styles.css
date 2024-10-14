@@ -78,6 +78,7 @@ h2 {
   letter-spacing:2px
 }
 .footer-col .links {
+  font-size: 14px;
   padding-left:0;
   list-style:none
 }
