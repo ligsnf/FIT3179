@@ -116,7 +116,7 @@ write_csv(population_state_area, "./data/state_population_area_malaysia.csv")
 population_state_area <- read_csv("./data/state_population_area_malaysia.csv", show_col_types = FALSE)
 
 # Filter the data for the selected years
-selected_years <- c(2012, 2014, 2016, 2018, 2020, 2022)
+selected_years <- seq(1980, 2024, by = 2)
 filtered_data <- population_state_area %>%
   filter(year %in% selected_years)
 
@@ -126,7 +126,4 @@ wide_data <- filtered_data %>%
 
 # Write the wide format data to a CSV file
 write_csv(wide_data, "./data/state_population_area_malaysia_wide.csv")
-
-# View the wide data (optional)
-print(wide_data)
-`
+```
