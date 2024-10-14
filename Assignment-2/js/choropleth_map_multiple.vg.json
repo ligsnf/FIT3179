@@ -1,0 +1,78 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Population Density of Malaysian States",
+  "width": 732,
+  "height": 312,
+  "params": [
+    {
+      "name": "selected_year",
+      "value": 2012,
+      "bind": {
+        "input": "range",
+        "min": 2012,
+        "max": 2022,
+        "step": 2,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "equirectangular"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.name",
+          "from": {
+            "data": {
+              "url": "data/state_population_area_malaysia_wide.csv"
+            },
+            "key": "state",
+            "fields": ["2012", "2014", "2016", "2018", "2020", "2022", "area"]
+          }
+        },
+        {
+          "calculate": "datum[selected_year] / datum.area",
+          "as": "population_density"
+        },
+        {
+          "calculate": "datum[selected_year]",
+          "as": "population"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "color": {
+          "field": "population_density",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [50, 100, 200, 500, 1000, 5000],
+            "range": ["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d"]
+          },
+          "legend": {
+            "title": "Population Density"
+          }
+        },
+        "tooltip": [
+          { "field": "properties.name", "type": "nominal", "title": "State" },
+          { "field": "area", "type": "quantitative", "title": "Area (km²)", "format": ",.0f" },
+          { "field": "population", "type": "quantitative", "title": "Population", "format": ",.0f" },
+          { "field": "population_density", "type": "quantitative", "title": "Population Density", "format": ",.2f" }
+        ]
+      }
+    }
+  ]
+}

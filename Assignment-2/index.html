@@ -124,6 +124,23 @@
 
     <div class="pure-g">
       <div class="pure-u-1-1">
+        <h2>Population Density by State</h2>
+      </div>
+      <div class="pure-u-1-1">
+        <div id="choropleth-map-multiple" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-1">
+        <p>
+          This map highlights the differences in household income and expenditure across Malaysian states, 
+          showcasing regions where residents are left with more disposable income after expenses. 
+          Kuala Lumpur and Selangor lead with the highest net incomes by a wide margin, 
+          reflecting stronger economic opportunities, better financial stability and quality of life.
+        </p>
+      </div>
+    </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-1">
         <h2>Consumer Price Index of Malaysian States</h2>
       </div>
       <div class="pure-u-1-1">
@@ -149,6 +166,7 @@
     var barChartMultiple = "js/bar_chart_multiple.vg.json";
     var choroplethMap = "js/choropleth_map.vg.json";
     var slopeChart = "js/slope_chart.vg.json";
+    var choroplethMapMultiple = "js/choropleth_map_multiple.vg.json";
     var lineChart = "js/line_chart.vg.json";
 
     vegaEmbed('#scatter-plot', scatterPlot, { "actions": false }).then(function (result) {
@@ -164,6 +182,10 @@
     }).catch(console.error);
 
     vegaEmbed('#slope-chart', slopeChart, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#choropleth-map-multiple', choroplethMapMultiple, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
         

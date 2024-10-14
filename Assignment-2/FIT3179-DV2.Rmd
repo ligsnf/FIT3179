@@ -109,3 +109,24 @@ population_state_area <- population_state %>%
 
 write_csv(population_state_area, "./data/state_population_area_malaysia.csv")
 ```
+
+### Convert to Wide Format
+```{r}
+# Read the data
+population_state_area <- read_csv("./data/state_population_area_malaysia.csv", show_col_types = FALSE)
+
+# Filter the data for the selected years
+selected_years <- c(2012, 2014, 2016, 2018, 2020, 2022)
+filtered_data <- population_state_area %>%
+  filter(year %in% selected_years)
+
+# Convert from long format to wide format, using 'state' as index and 'year' as columns
+wide_data <- filtered_data %>%
+  pivot_wider(names_from = year, values_from = population)
+
+# Write the wide format data to a CSV file
+write_csv(wide_data, "./data/state_population_area_malaysia_wide.csv")
+
+# View the wide data (optional)
+print(wide_data)
+`
