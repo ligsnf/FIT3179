@@ -8,7 +8,7 @@
     {
       "filter": {
         "field": "state",
-        "oneOf": ["Selangor", "Kuala Lumpur", "Pulau Pinang", "Johor", "Sabah", "Sarawak"]
+        "oneOf": ["Selangor", "Kuala Lumpur", "Penang", "Johor", "Sabah", "Sarawak"]
       }
     }
   ],
@@ -52,7 +52,7 @@
           "field": "state",
           "type": "nominal",
           "scale": {
-            "domain": ["Selangor", "Kuala Lumpur", "Pulau Pinang", "Johor", "Sabah", "Sarawak"],
+            "domain": ["Selangor", "Kuala Lumpur", "Penang", "Johor", "Sabah", "Sarawak"],
             "range": ["#edca3b", "#004d40", "#774f17", "#55a34b", "#72b8b2", "#4c78a8"]
           }
         },

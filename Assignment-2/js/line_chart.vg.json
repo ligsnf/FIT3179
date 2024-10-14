@@ -14,7 +14,7 @@
         {
           "filter": {
             "field": "state",
-            "oneOf": ["Selangor", "Kuala Lumpur", "Melaka", "Pahang", "Pulau Pinang", "Johor", "Sabah", "Sarawak", "Terengganu"]
+            "oneOf": ["Selangor", "Kuala Lumpur", "Melaka", "Pahang", "Penang", "Johor", "Sabah", "Sarawak", "Terengganu"]
           }
         }
       ],
@@ -43,7 +43,7 @@
               "title": "State",
               "type": "nominal",
               "scale": {
-                "domain": ["Selangor", "Kuala Lumpur", "Melaka", "Pahang", "Pulau Pinang", "Johor", "Sabah", "Sarawak", "Terengganu"],
+                "domain": ["Selangor", "Kuala Lumpur", "Melaka", "Pahang", "Penang", "Johor", "Sabah", "Sarawak", "Terengganu"],
                 "range": ["#edca3b", "#004d40", "#b379a2", "#f28518", "#774f17", "#55a34b", "#72b8b2", "#4c78a8", "#d81b60"]
               }
             },
@@ -107,7 +107,7 @@
         {
           "filter": {
             "field": "state",
-            "oneOf": ["Selangor", "Kuala Lumpur", "Melaka", "Pahang", "Pulau Pinang", "Johor", "Sabah", "Sarawak", "Terengganu"]
+            "oneOf": ["Selangor", "Kuala Lumpur", "Melaka", "Pahang", "Penang", "Johor", "Sabah", "Sarawak", "Terengganu"]
           }
         }
       ],
