@@ -17,8 +17,13 @@ body::before {
   opacity: 0.5; /* Adjust the opacity */
   z-index: -1; /* Ensure the background stays behind all content */
 }
+
 .vega-bind * {
   font-size: 14px;
+}
+
+.vega-bind {
+  padding: 3px;
 }
 
 h1, h1 span {

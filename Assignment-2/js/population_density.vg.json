@@ -132,15 +132,153 @@
             "range": ["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d"]
           },
           "legend": {
-            "title": "Population Density"
+            "title": ["Population Density", "(population/km²)"]
           }
         },
         "tooltip": [
           { "field": "properties.name", "type": "nominal", "title": "State" },
-          { "field": "area", "type": "quantitative", "title": "Area (km²)", "format": ",.0f" },
           { "field": "population", "type": "quantitative", "title": "Population", "format": ",.0f" },
-          { "field": "population_density", "type": "quantitative", "title": "Population Density", "format": ",.2f" }
+          { "field": "area", "type": "quantitative", "title": "Area (km²)", "format": ",.0f" },
+          { "field": "population_density", "type": "quantitative", "title": "Density", "format": ",.2f" }
         ]
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {"calculate": "101.8", "as": "longitude"},
+        {"calculate": "3.1", "as": "latitude"},
+        {"calculate": "105", "as": "longitude2"},
+        {"calculate": "3.1", "as": "latitude2"},
+        {"calculate": "datum.properties.NAME", "as": "annotationText"}
+      ],
+      "mark": {"type": "rule", "stroke": "#bf1cff", "strokeWidth": 2},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "longitude2": {"field": "longitude2"},
+        "latitude2": {"field": "latitude2"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "split('Kuala Lumpur has the \\n highest density by far', '\\n')",
+          "as": "annotationText"
+        },
+        {"calculate": "105.2", "as": "longitude"},
+        {"calculate": "3.3", "as": "latitude"}
+      ],
+      "mark": {"type": "text", "dx": 0, "dy": 0, "color": "#bf1cff", "align": "left"},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "text": {"field": "annotationText"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {"calculate": "102.8", "as": "longitude"},
+        {"calculate": "4.4", "as": "latitude"},
+        {"calculate": "105", "as": "longitude2"},
+        {"calculate": "5.4", "as": "latitude2"},
+        {"calculate": "datum.properties.NAME", "as": "annotationText"}
+      ],
+      "mark": {"type": "rule", "stroke": "#bf1cff", "strokeWidth": 2},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "longitude2": {"field": "longitude2"},
+        "latitude2": {"field": "latitude2"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "split('Pahang region\\nhas low density', '\\n')",
+          "as": "annotationText"
+        },
+        {"calculate": "105.2", "as": "longitude"},
+        {"calculate": "5.6", "as": "latitude"}
+      ],
+      "mark": {"type": "text", "dx": 0, "dy": 0, "color": "#bf1cff", "align": "left"},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "text": {"field": "annotationText"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {"calculate": "114.7", "as": "longitude"},
+        {"calculate": "4.6", "as": "latitude"},
+        {"calculate": "112.7", "as": "longitude2"},
+        {"calculate": "5.4", "as": "latitude2"},
+        {"calculate": "datum.properties.NAME", "as": "annotationText"}
+      ],
+      "mark": {"type": "rule", "stroke": "#bf1cff", "strokeWidth": 2},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "longitude2": {"field": "longitude2"},
+        "latitude2": {"field": "latitude2"}
+      }
+    },
+    {
+      "data": {
+        "url": "js/ne_10m_malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "split('Eastern island has low \\n density besides Labuan', '\\n')",
+          "as": "annotationText"
+        },
+        {"calculate": "110.9", "as": "longitude"},
+        {"calculate": "6.1", "as": "latitude"}
+      ],
+      "mark": {"type": "text", "dx": 0, "dy": 0, "color": "#bf1cff", "align": "left"},
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "text": {"field": "annotationText"}
       }
     }
   ]

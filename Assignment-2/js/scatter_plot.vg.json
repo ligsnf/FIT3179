@@ -8,6 +8,15 @@
   },
   "params": [
     {
+      "name": "Continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [null, "North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
+        "labels": ["Show All", "North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
+        "name": "Continent Selection: "
+      }
+    },
+    {
       "name": "Population_Above",
       "value": 0,
       "bind": {
@@ -16,15 +25,6 @@
         "max": 100000000,
         "step": 1000000,
         "name": "Minimum Population: "
-      }
-    },
-    {
-      "name": "Continent_selection",
-      "bind": {
-        "input": "select",
-        "options": [null, "North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
-        "labels": ["Show All", "North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
-        "name": "Continent Selection: "
       }
     }
   ],
