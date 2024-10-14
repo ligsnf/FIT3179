@@ -130,7 +130,7 @@
         },
         "y": {
           "field": "index",
-          "title": "CPI",
+          "title": null,
           "type": "quantitative",
           "axis": { "tickCount": 3, "grid": false },
           "scale": {
