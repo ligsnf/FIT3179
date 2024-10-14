@@ -1,128 +1,141 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container",
-  "height": 350,
-  "data": {
-    "url": "data/cpi_2d_state_filtered.csv"
-  },
-  "params": [
+  "vconcat": [
     {
-      "name": "Division_Selection",
-      "bind": {
-        "input": "select",
-        "element": "#line-chart-select",
-        "options": [
-          "overall",
-          "01",
-          "02",
-          "03",
-          "04",
-          "05",
-          "06",
-          "07",
-          "08",
-          "09",
-          "10",
-          "11",
-          "12",
-          "13"
-        ],
-        "labels": [
-          "Overall",
-          "Food & Beverages",
-          "Alcoholic Beverages & Tobacco",
-          "Clothing & Footwear",
-          "Housing, Utilities, Gas & Other Fuels",
-          "Household Furnishings, Equipment & Maintenance",
-          "Health",
-          "Transport",
-          "Information & Communication",
-          "Recreation, Sport & Culture",
-          "Education",
-          "Restaurant & Accommodation Services",
-          "Insurance & Financial Services",
-          "Personal Care, Social Protection & Miscellaneous Goods and Services"
-        ],
-        "name": "Category: "
+      "width": 700,
+      "height": 350,
+      "data": {
+        "url": "data/cpi_2d_state_filtered.csv"
       },
-      "value": "overall"
-    }
-  ],
-  "transform": [
-    {
-      "filter": "datum.division == Division_Selection"
-    }
-  ],
-  "encoding": {
-    "x": {
-      "field": "date",
-      "type": "temporal",
-      "title": "Date",
-      "axis": {"format": "%Y"}
+      "transform": [
+        {
+          "filter": "datum.division == 'overall'"
+        },
+        {
+          "filter": {
+            "field": "state",
+            "oneOf": ["Selangor", "Kuala Lumpur", "Melaka", "Pahang", "Pulau Pinang", "Johor", "Sabah", "Sarawak", "Terengganu"]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "title": null,
+          "scale": { "domain": { "param": "brush" } }
+        },
+        "y": {
+          "field": "index",
+          "type": "quantitative",
+          "title": "CPI (Consumer Price Index)",
+          "scale": {
+            "domain": [95, 145]
+          }
+        }
+      },
+      "layer": [
+        {
+          "mark": "line",
+          "encoding": {
+            "color": {
+              "field": "state",
+              "title": "State",
+              "type": "nominal",
+              "scale": {
+                "domain": ["Selangor", "Kuala Lumpur", "Melaka", "Pahang", "Pulau Pinang", "Johor", "Sabah", "Sarawak", "Terengganu"],
+                "range": ["#edca3b", "#004d40", "#b379a2", "#f28518", "#774f17", "#55a34b", "#72b8b2", "#4c78a8", "#d81b60"]
+              }
+            },
+            "tooltip": [
+              {
+                "title": "State",
+                "field": "state",
+                "type": "nominal"
+              },
+              {
+                "title": "CPI",
+                "field": "index",
+                "type": "quantitative"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [4, 4], 
+            "size": 1
+          },
+          "encoding": {
+            "x": {
+              "datum": { "year": 2020, "month": 3, "date": 11 }, 
+              "type": "temporal"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 14,
+            "dx": -5,
+            "align": "right"
+          },
+          "encoding": {
+            "text": { "value": "COVID-19 Pandemic Begins" },
+            "x": {
+              "datum": { "year": 2020, "month": 3, "date": 11 }, 
+              "type": "temporal"
+            },
+            "y": {
+              "datum": 141
+            }
+          }
+        }
+      ]
     },
-    "y": {
-      "field": "index",
-      "type": "quantitative",
-      "title": "CPI (Consumer Price Index)",
-      "scale": {"zero": false}
-    }
-  },
-  "layer": [
     {
+      "width": 700,
+      "height": 60,
+      "data": {
+        "url": "data/cpi_2d_state_filtered.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.division == 'overall'"
+        },
+        {
+          "filter": {
+            "field": "state",
+            "oneOf": ["Selangor", "Kuala Lumpur", "Melaka", "Pahang", "Pulau Pinang", "Johor", "Sabah", "Sarawak", "Terengganu"]
+          }
+        }
+      ],
       "mark": "line",
+      "params": [{
+        "name": "brush",
+        "select": { "type": "interval", "encodings": ["x"] }
+      }],
       "encoding": {
         "color": {
           "field": "state",
           "title": "State",
           "type": "nominal"
         },
-        "tooltip": [
-          {
-            "title": "State",
-            "field": "state",
-            "type": "nominal"
-          },
-          {
-            "title": "CPI",
-            "field": "index",
-            "type": "quantitative"
-          },
-          {
-            "title": "Category",
-            "field": "division",
-            "type": "nominal"
-          }
-        ]
-      }
-    },
-    {
-      "mark": {
-        "type": "rule",
-        "strokeDash": [8, 8], 
-        "size": 1
-      },
-      "encoding": {
         "x": {
-          "datum": {"year": 2020, "month": 3, "date": 11}, 
-          "type": "temporal"
-        }
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "fontSize": 14,
-        "dx": 5,
-        "align": "left"
-      },
-      "encoding": {
-        "text": {"value": "COVID-19 Pandemic Begins"},
-        "x": {
-          "datum": {"year": 2020, "month": 3, "date": 11}, 
-          "type": "temporal"
+          "field": "date",
+          "title": "Date",
+          "type": "temporal",
+          "axis": { "tickCount": 10 }
         },
         "y": {
-          "datum": 103
+          "field": "index",
+          "title": "CPI",
+          "type": "quantitative",
+          "axis": { "tickCount": 3, "grid": false },
+          "scale": {
+            "domain": [95, 145]
+          }
         }
       }
     }
