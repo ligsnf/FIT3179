@@ -57,7 +57,7 @@
   "layer": [
     {
       "mark": {
-        "type": "line",
+        "type": "rule",
         "strokeDash": [4, 4],
         "color": "grey",
         "strokeWidth": 2,
@@ -66,16 +66,14 @@
       "encoding": {
         "x": {
           "datum": 0,
-          "type": "quantitative",
-          "scale": {"domain": [0, 120]}
+          "type": "quantitative"
         },
         "x2": {
           "datum": 120
         },
         "y": {
           "datum": 0,
-          "type": "quantitative",
-          "scale": {"domain": [0, 120]}
+          "type": "quantitative"
         },
         "y2": {
           "datum": 120
