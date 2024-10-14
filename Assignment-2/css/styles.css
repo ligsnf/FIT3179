@@ -101,3 +101,25 @@ h1 {
   font-size: 14px;
   color: gray;
 }
+
+#population-density .control-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+#population-density .vega-bindings {
+  display: inline-block;
+}
+
+#population-density .button-container {
+  display: flex;
+  gap: 10px; /* Adds space between the buttons */
+}
+
+#pauseButton, #resetButton {
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}

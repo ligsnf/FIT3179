@@ -21,7 +21,8 @@
   <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 
-
+  <!-- JS file -->
+  <script src="js/population_density.js"></script>
 </head>
 
 <body>
@@ -127,7 +128,7 @@
         <h2>Population Density by State (1980-2024)</h2>
       </div>
       <div class="pure-u-1-1">
-        <div id="choropleth-map-multiple" class="vis-container"></div>
+        <div id="population-density" class="vis-container"></div>
       </div>
       <div class="pure-u-1-1">
         <p>
@@ -166,7 +167,6 @@
     var barChartMultiple = "js/bar_chart_multiple.vg.json";
     var choroplethMap = "js/choropleth_map.vg.json";
     var slopeChart = "js/slope_chart.vg.json";
-    var choroplethMapMultiple = "js/choropleth_map_multiple.vg.json";
     var lineChart = "js/line_chart.vg.json";
 
     vegaEmbed('#scatter-plot', scatterPlot, { "actions": false }).then(function (result) {
@@ -182,10 +182,6 @@
     }).catch(console.error);
 
     vegaEmbed('#slope-chart', slopeChart, { "actions": false }).then(function (result) {
-      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-    }).catch(console.error);
-
-    vegaEmbed('#choropleth-map-multiple', choroplethMapMultiple, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
         

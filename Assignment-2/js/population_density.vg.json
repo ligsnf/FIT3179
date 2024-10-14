@@ -5,14 +5,18 @@
   "height": 312,
   "params": [
     {
-      "name": "selected_year",
-      "value": 1980,
+      "name": "center_to",
+      "value": [109.93, 4.01],
       "bind": {
-        "input": "range",
-        "min": 1980,
-        "max": 2024,
-        "step": 2,
-        "name": "Select Year: "
+        "input": "select",
+        "options": [
+          [109.93, 4.01],
+          [101.7, 3.1],
+          [115.7, 4.6],
+          [100.3, 5.4]
+        ],
+        "labels": ["Centre", "Kuala Lumpur", "Sarawak", "Pilau Pinang"],
+        "name": "Map Centre: "
       }
     },
     {
@@ -27,18 +31,14 @@
       } 
     },
     {
-      "name": "center_to",
-      "value": [109.93, 4.01],
+      "name": "selected_year",
+      "value": 1980,
       "bind": {
-        "input": "select",
-        "options": [
-          [109.93, 4.01],
-          [101.7, 3.1],
-          [115.7, 4.6],
-          [100.3, 5.4]
-        ],
-        "labels": ["Centre", "Kuala Lumpur", "Sarawak", "Pilau Pinang"],
-        "name": "Map Centre: "
+        "input": "range",
+        "min": 1980,
+        "max": 2024,
+        "step": 2,
+        "name": "Year: "
       }
     }
   ],
