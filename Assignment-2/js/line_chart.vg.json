@@ -125,14 +125,12 @@
         "x": {
           "field": "date",
           "title": "Date",
-          "type": "temporal",
-          "axis": { "tickCount": 10 }
+          "type": "temporal"
         },
         "y": {
           "field": "index",
           "title": null,
           "type": "quantitative",
-          "axis": { "tickCount": 3, "grid": false },
           "scale": {
             "domain": [95, 145]
           }
